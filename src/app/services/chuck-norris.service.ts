@@ -11,7 +11,7 @@ import { Joke, SearchResult } from '../models';
 })
 export class ChuckNorrisService {
 
-  private apiUrl = 'https://api.chucknorris.io/jokes';
+  apiUrl = 'https://api.chucknorris.io/jokes';
 
   constructor(private httpClient: HttpClient) { }
 
