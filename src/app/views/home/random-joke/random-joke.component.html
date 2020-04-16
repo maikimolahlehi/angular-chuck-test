@@ -3,16 +3,25 @@
     <div class="modal-content">
       <div class="card">
         <ng-container *ngIf="!loading">
-          <div class="row mt-2">
-            <div class="col-md-12 pt-3">
-              <img [src]="joke?.icon_url" class="rounded mx-auto d-block img-thumbnail" />
+          <ng-container *ngIf="joke">
+            <div class="row mt-2">
+              <div class="col-md-12 pt-3">
+                <img [src]="joke?.icon_url" class="rounded mx-auto d-block img-thumbnail" />
+              </div>
             </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-md-12 text-center">
-              {{joke?.value}}
+            <div class="row mb-2">
+              <div class="col-md-12 text-center">
+                {{joke?.value}}
+              </div>
             </div>
-          </div>
+          </ng-container>
+          <ng-container *ngIf="error">
+            <div class="row mt-2">
+              <div class="col-md-12 pt-3 text-center mb-3">
+                {{error}}
+              </div>
+            </div>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="loading">
           <app-loading></app-loading>

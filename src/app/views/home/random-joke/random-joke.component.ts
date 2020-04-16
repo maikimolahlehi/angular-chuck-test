@@ -22,14 +22,20 @@ export class RandomJokeComponent implements OnInit, OnChanges {
 
       if (joke && joke.currentValue) {
         this.joke = joke.currentValue;
+      } else {
+        this.joke = null;
       }
 
       if (loading && loading.currentValue) {
         this.loading = loading.currentValue;
+      } else {
+        this.loading = false;
       }
 
       if (error && error.currentValue) {
         this.error = error.currentValue;
+      } else {
+        this.error = null;
       }
     }
   }

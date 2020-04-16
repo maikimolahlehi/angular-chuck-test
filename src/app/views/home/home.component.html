@@ -3,32 +3,47 @@
     <h1 class="text-center">Categories</h1>
   </div>
 </div>
-
 <ng-container *ngIf="!loadingCategories">
-  <div class="row mb-2">
-    <div class="col-md-12">
-      <div class="list-group text-center">
-        <ng-container *ngFor="let category of (categories$| async) | paginate: { itemsPerPage: 8, currentPage: page }">
-          <a href="#" (click)="randomJoke($event,category)" class="list-group-item list-group-item-action">
-            {{category}}
-          </a>
-        </ng-container>
+  <ng-container *ngIf="(categories$| async).length > 0">
+    <div class="row mt-4 mb-2">
+      <div class="col-md-12">
+        <h6 class="text-center text-info">Click on any category below to get a random joke </h6>
       </div>
     </div>
-  </div>
-
-  <div class="row mb-2">
-    <div class="row mt-4 mx-auto d-block">
-      <div class="col-md-12 text-center">
-        <pagination-controls [ngClass]="'pagination'" (pageChange)="pageChanged($event)">
-        </pagination-controls>
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <div class="list-group text-center">
+          <ng-container
+            *ngFor="let category of (categories$| async) | paginate: { itemsPerPage: 8, currentPage: page }">
+            <a href="#" (click)="randomJoke($event,category)" class="list-group-item list-group-item-action">
+              {{category}}
+            </a>
+          </ng-container>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="row mb-2">
+      <div class="row mt-4 mx-auto d-block">
+        <div class="col-md-12 text-center">
+          <pagination-controls [ngClass]="'pagination'" (pageChange)="pageChanged($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(categories$| async).length === 0">
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <p class="text-info text-center">
+          There are no categories, please try again later
+        </p>
+      </div>
+    </div>
+  </ng-container>
 </ng-container>
 
 <ng-container *ngIf="loadingCategories">
   <app-loading></app-loading>
 </ng-container>
 
-<app-random-joke [joke]="joke" [loading]="loadingJoke"></app-random-joke>
+<app-random-joke [joke]="joke" [loading]="loadingJoke" [error]="error"></app-random-joke>

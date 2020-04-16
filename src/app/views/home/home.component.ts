@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   loadingJoke = false;
 
   page = 1;
+  error: string;
 
   constructor(private chuckNorrisService: ChuckNorrisService) { }
 
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
         this.loadingJoke = false;
       },
       error => {
+        this.error = 'We could not get the joke, please try again later';
         this.loadingJoke = false;
       }
     );
