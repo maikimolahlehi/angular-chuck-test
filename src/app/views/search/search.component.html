@@ -1,0 +1,73 @@
+<form action="" [formGroup]="searchFormGroup">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search here ..." formControlName="query" minlength="3"
+          maxlength="120" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHandler()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="(query?.invalid && (query?.dirty || query?.touched)) || (isSubmitted)">
+      <ng-container *ngIf="query?.errors?.required">
+        <p class="ml-3 text-warning">
+          Please provide keyword to search for
+        </p>
+        <br />
+      </ng-container>
+      <ng-container *ngIf="!query?.errors?.required">
+        <ng-container *ngIf="query?.errors?.minlength">
+          <p class="ml-3 text-warning">
+            Keyword must at at least be 3 characters long
+          </p>
+          <br />
+        </ng-container>
+        <ng-container *ngIf="query?.errors?.maxlength">
+          <p class="ml-3 text-warning">
+            Keyword must at at most be 120 characters long
+          </p>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>
+
+<ng-container *ngIf="!loading">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <ng-container *ngFor="let joke of (jokes$ | async)| paginate: { itemsPerPage: 10, currentPage: page }">
+          <div class="row pt-2 mb-1">
+            <div class="col-md-12">
+              <div class="card ml-2 mr-2">
+                <div class="media p-2">
+                  <img [src]="joke.icon_url" class="align-self-center mr-3" alt="..." />
+                  <div class="media-body align-self-center">
+                    <p class="align-self-center">{{joke.value}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="(jokes$ | async).length > 10">
+    <div class="row mt-4 mx-auto d-block">
+      <div class="col-md-12 text-center">
+        <pagination-controls [ngClass]="'pagination'" (pageChange)="pageChanged($event)">
+        </pagination-controls>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="loading">
+  <app-loading></app-loading>
+</ng-container>
+
+<div class="mb-5 row"></div>
