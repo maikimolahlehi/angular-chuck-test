@@ -7,7 +7,7 @@ import {
 import { ChuckNorrisService } from './chuck-norris.service';
 import { Joke, SearchResult } from '../models';
 
-fdescribe('ChuckNorrisService', () => {
+describe('ChuckNorrisService', () => {
   let service: ChuckNorrisService;
   let httpMock: HttpTestingController;
 
@@ -36,7 +36,7 @@ fdescribe('ChuckNorrisService', () => {
   });
 
   it('should call https://api.chucknorris.io/jokes/categories', () => {
-    const categories: string[] = ['Aminals', 'Fashion'];
+    const categories: string[] = ['Animals', 'Fashion'];
     service.getCategories().subscribe(response => {
       expect(response).toEqual(categories);
     });
@@ -62,7 +62,7 @@ fdescribe('ChuckNorrisService', () => {
 
   it('should call https://api.chucknorris.io/jokes/random?category=Animals', () => {
     const joke: Joke = {
-      categories: ['Aminals'],
+      categories: ['Animals'],
       created_at: '',
       icon_url: 'www.test-icon.co.za',
       id: '1',

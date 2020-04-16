@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { Joke } from '../../../models';
-import { ChuckNorrisService } from '../../../services/chuck-norris.service';
 
 @Component({
   selector: 'app-random-joke',
@@ -13,7 +12,7 @@ export class RandomJokeComponent implements OnInit, OnChanges {
   @Input() loading = false;
   @Input() error = null;
 
-  constructor(private chuckNorrisService: ChuckNorrisService) { }
+  constructor() { }
 
   ngOnInit() { }
 
