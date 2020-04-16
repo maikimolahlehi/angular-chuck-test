@@ -110,7 +110,7 @@ describe('HomeComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     const pagintation = fixture.debugElement.query(By.css('pagination-controls'));
-    expect(pagintation).toBeDefined();
+    expect(pagintation != null).toBeTrue();
   });
 
   it('should change list if next button is clicked on the pagination', () => {
